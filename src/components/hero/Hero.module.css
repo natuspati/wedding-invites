@@ -1,0 +1,15 @@
+.heroSection {
+  text-align: center;
+}
+
+.heroSection h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.date {
+  font-size: 15px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 0;
+}

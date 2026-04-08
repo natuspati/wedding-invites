@@ -1,0 +1,25 @@
+.directionsLink {
+  display: inline-block;
+  color: #007aff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.directionsLink:hover {
+  text-decoration: underline;
+}
+
+.mapWrapper {
+  margin-top: 20px;
+  height: 450px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-height: 700px) {
+  .mapWrapper {
+    height: 350px;
+  }
+}

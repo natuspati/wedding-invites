@@ -1,0 +1,77 @@
+.card {
+  background: #f7f7f7;
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #eee;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.choiceGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.choiceBtn {
+  background: white;
+  color: #444;
+  border: 2px solid #eee;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.choiceBtn.active {
+  border-color: #222;
+  background: #222;
+  color: white;
+}
+
+.inputExpansion {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputExpansion.show {
+  max-height: 200px;
+  margin-top: 10px;
+}
+
+.inputExpansion input {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submitBtn {
+  margin-top: 10px;
+  background: #000;
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.submitBtn:disabled {
+  background: #ccc;
+}
