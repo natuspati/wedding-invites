@@ -33,7 +33,7 @@ export default function RSVP() {
     return (
       <section>
         <div className="container section-card">
-          <h2>Көп рақмет! ❤️</h2>
+          <h3>Көп рақмет! ❤️</h3>
           <p>Сіздің қауабыңыз сақталды.</p>
         </div>
       </section>
@@ -43,7 +43,7 @@ export default function RSVP() {
   return (
     <section>
       <div className="container section-card">
-        <h2>Сауалнама</h2>
+        <h3>Сауалнама</h3>
         <form onSubmit={submit} className={styles.form}>
           <div className={styles.choiceGroup}>
             <button

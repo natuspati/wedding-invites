@@ -3,8 +3,8 @@
 }
 
 .heroSection h1 {
-  font-size: 28px;
-  margin-bottom: 8px;
+  font-size: 22px;
+  margin-bottom: 0;
 }
 
 .date {
@@ -12,4 +12,8 @@
   font-weight: 500;
   color: #666;
   margin-bottom: 0;
+}
+
+.quote {
+  font-style: italic;
 }
