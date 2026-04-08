@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import config from "@/config";
+import backgroundMusic from "@/assets/background.mp3";
 
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -23,7 +24,7 @@ export default function BackgroundMusic() {
 
   return (
     <audio ref={audioRef} loop>
-      <source src="/background.mp3" type="audio/mpeg" />
+      <source src={backgroundMusic} type="audio/mpeg" />
     </audio>
   );
 }
