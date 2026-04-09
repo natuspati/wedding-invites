@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import config from "@/config"
-import styles from "./Countdown.module.css";
+import styles from "@/components/countdown/Countdown.module.css";
 
 interface TimeLeft {
   days: number;

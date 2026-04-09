@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
-import styles from "./RSVP.module.css";
-
-type RSVPChoice = "solo" | "partner" | "no" | null;
+import {useState, useEffect} from "react";
+import styles from "@/components/rsvp/RSVP.module.css";
+import config from "@/config";
+import {RSVPChoice, RSVPCreateSchema, RSVPInDB} from "@/components/rsvp/RSVP.shema"
+import ErrorMessage from "@/components/rsvp/ErrorMessage"
 
 export default function RSVP() {
-  const [choice, setChoice] = useState<RSVPChoice>(null);
+  const [choice, setChoice] = useState<RSVPChoice | null>(null);
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (localStorage.getItem("wedding_rsvp_submitted")) {
@@ -25,8 +27,45 @@ export default function RSVP() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    localStorage.setItem("wedding_rsvp_submitted", "true");
-    setSubmitted(true);
+    setError(null);
+
+    const payload = {
+      choice: choice!,
+      name: choice === "no" ? null : name1 || null,
+      partner_name: choice === "partner" ? name2 || null : null,
+    };
+
+    const validation = RSVPCreateSchema.safeParse(payload);
+
+    if (!validation.success) {
+      setError(validation.error.issues.map(i => i.message).join(", "));
+      return;
+    }
+
+    try {
+      const response = await fetch(`${config.apiUrl}/api/v1/rsvp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Сервер қатесі");
+      }
+
+      const data: RSVPInDB = await response.json();
+
+      console.log(`Saved RSVP with id: ${data.id}`);
+
+      localStorage.setItem("wedding_rsvp_submitted", "true");
+      setSubmitted(true);
+
+    } catch (err) {
+      console.error(err);
+      setError("Сұрау жіберу кезінде қате орын алды.");
+    }
   }
 
   if (submitted) {
@@ -83,7 +122,7 @@ export default function RSVP() {
                 placeholder="Жұбайымның аты-жөні"
                 value={name2}
                 onChange={(e) => setName2(e.target.value)}
-                required
+                disabled={choice !== "partner"}
               />
             )}
           </div>
@@ -94,6 +133,8 @@ export default function RSVP() {
             </button>
           )}
         </form>
+
+        {error && <ErrorMessage message={error}/>}
       </div>
     </section>
   );

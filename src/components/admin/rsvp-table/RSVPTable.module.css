@@ -1,0 +1,254 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+}
+
+.filterInput {
+  padding: 9px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 180px;
+}
+
+.filterInput:focus {
+  border-color: #b08d6a;
+}
+
+.filterBtn {
+  padding: 9px 18px;
+  background: #b08d6a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.filterBtn:hover {
+  background: #9a7a59;
+}
+
+.resetBtn {
+  padding: 9px 14px;
+  background: transparent;
+  color: #666;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.resetBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.statsBar {
+  display: flex;
+  gap: 28px;
+  font-size: 15px;
+  color: #444;
+  padding: 10px 4px;
+}
+
+.statsNote {
+  font-size: 12px;
+  color: #999;
+}
+
+.tableWrapper {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table thead {
+  background: rgba(176, 141, 106, 0.12);
+}
+
+.table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: #333;
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: rgba(176, 141, 106, 0.06);
+}
+
+.idCell {
+  color: #aaa;
+  font-size: 12px;
+  width: 40px;
+}
+
+.dateCell {
+  white-space: nowrap;
+  color: #777;
+  font-size: 13px;
+}
+
+.empty {
+  color: #bbb;
+  text-align: center;
+  padding: 32px 0;
+  display: block;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusSolo {
+  background: rgba(52, 168, 83, 0.12);
+  color: #2d7a46;
+}
+
+.statusDuo {
+  background: rgba(66, 133, 244, 0.12);
+  color: #1a5bb5;
+}
+
+.statusNo {
+  background: rgba(192, 57, 43, 0.1);
+  color: #a93226;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.deleteBtn:hover {
+  background: rgba(192, 57, 43, 0.1);
+  color: #c0392b;
+}
+
+.sentinel {
+  height: 1px;
+}
+
+.loadingRow {
+  text-align: center;
+  padding: 16px;
+  color: #999;
+  font-size: 14px;
+}
+
+.errorRow {
+  text-align: center;
+  padding: 16px;
+  color: #c0392b;
+  font-size: 14px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.cancelBtn {
+  background: #eee;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirmBtn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirmBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

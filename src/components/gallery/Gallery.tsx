@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./Gallery.module.css";
+import styles from "@/components/gallery/Gallery.module.css";
 
 const mediaModules = import.meta.glob("/src/assets/gallery/*.{png,mp4}", {
   eager: true,

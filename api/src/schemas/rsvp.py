@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Annotated
 
-from pydantic import BaseModel, Field, StringConstraints, computed_field, PositiveInt
+from pydantic import BaseModel, Field, PositiveInt, StringConstraints, computed_field
 
 from enums import RSVPStatusEnum
 
@@ -40,12 +40,12 @@ class RSVPFilterSchema(BaseModel):
     page_size: Annotated[int, Field(ge=1, le=100)] = 100
     start: datetime = Field(default_factory=lambda: datetime.now() - timedelta(days=90))
     end: datetime = Field(default_factory=datetime.now)
-    name: NameStr = None
+    name: str | None = None
 
     @computed_field
     def offset(self) -> int:
         return (self.page - 1) * self.page_size
-    
+
     @computed_field
     def limit(self) -> int:
         return self.page_size

@@ -33,6 +33,9 @@ class Settings(BaseSettings):
     openapi_schema_user: str = "user"
     openapi_schema_password: str = "password"
 
+    # CORS
+    allowed_hosts: list[str] = ["*"]
+
     # Database
     db_apply_migrations: bool = False
     db_driver: str = "sqlite"

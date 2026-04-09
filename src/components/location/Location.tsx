@@ -1,4 +1,4 @@
-import styles from "./Location.module.css";
+import styles from "@/components/location/Location.module.css";
 
 export default function Location() {
   return (
