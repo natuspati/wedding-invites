@@ -1,5 +1,5 @@
-import {z} from "zod";
-import {RSVPInDBSchema} from "@/components/rsvp/RSVP.shema";
+import { z } from "zod";
+import { RSVPInDBSchema } from "@/components/rsvp/RSVP.shema";
 
 export const PaginatedRSVPSchema = z.object({
   page: z.number(),

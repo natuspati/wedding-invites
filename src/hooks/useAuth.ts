@@ -1,32 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import config from "@/config";
 
 export function useAuth() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(() => {
+    if (typeof window === "undefined") return false;
+
+    const sessionStr = localStorage.getItem(config.adminStorageKey);
+    if (!sessionStr) return false;
+
+    try {
+      const session = JSON.parse(sessionStr);
+      const now = new Date().getTime();
+      if (session.authenticated && now < session.expiry) {
+        return true;
+      }
+      localStorage.removeItem(config.adminStorageKey);
+      return false;
+    } catch {
+      localStorage.removeItem(config.adminStorageKey);
+      return false;
+    }
+  });
+
+  const [loading] = useState(false);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    const sessionStr = localStorage.getItem(config.adminStorageKey);
-    if (sessionStr) {
-      try {
-        const session = JSON.parse(sessionStr);
-        const now = new Date().getTime();
-
-        if (session.authenticated && now < session.expiry) {
-          setAuthenticated(true);
-        } else {
-          localStorage.removeItem(config.adminStorageKey);
-        }
-      } catch (e) {
-        localStorage.removeItem(config.adminStorageKey);
-      }
-    }
-    setLoading(false);
-  }, []);
-
   const login = (password: string, username: string) => {
-    if (username === config.adminUsername && password === config.adminPassword) {
+    if (
+      username === config.adminUsername &&
+      password === config.adminPassword
+    ) {
       const expiry = new Date().getTime() + config.adminStorageTTL;
       const sessionData = { authenticated: true, expiry };
 

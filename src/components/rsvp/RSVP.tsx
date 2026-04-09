@@ -1,8 +1,9 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import styles from "@/components/rsvp/RSVP.module.css";
 import config from "@/config";
-import {RSVPChoice, RSVPCreateSchema, RSVPInDB} from "@/components/rsvp/RSVP.shema"
-import ErrorMessage from "@/components/rsvp/ErrorMessage"
+import type { RSVPChoice, RSVPInDB } from "@/components/rsvp/RSVP.shema";
+import { RSVPCreateSchema } from "@/components/rsvp/RSVP.shema";
+import ErrorMessage from "@/components/rsvp/ErrorMessage";
 
 export default function RSVP() {
   const [choice, setChoice] = useState<RSVPChoice | null>(null);
@@ -38,7 +39,7 @@ export default function RSVP() {
     const validation = RSVPCreateSchema.safeParse(payload);
 
     if (!validation.success) {
-      setError(validation.error.issues.map(i => i.message).join(", "));
+      setError(validation.error.issues.map((i) => i.message).join(", "));
       return;
     }
 
@@ -46,9 +47,9 @@ export default function RSVP() {
       const response = await fetch(`${config.apiUrl}/api/v1/rsvp`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -61,7 +62,6 @@ export default function RSVP() {
 
       localStorage.setItem("wedding_rsvp_submitted", "true");
       setSubmitted(true);
-
     } catch (err) {
       console.error(err);
       setError("Сұрау жіберу кезінде қате орын алды.");
@@ -110,7 +110,9 @@ export default function RSVP() {
             </button>
           </div>
 
-          <div className={`${styles.inputExpansion} ${choice && choice !== "no" ? styles.show : ""}`}>
+          <div
+            className={`${styles.inputExpansion} ${choice && choice !== "no" ? styles.show : ""}`}
+          >
             <input
               placeholder="Аты-жөнім"
               value={name1}
@@ -134,7 +136,7 @@ export default function RSVP() {
           )}
         </form>
 
-        {error && <ErrorMessage message={error}/>}
+        {error && <ErrorMessage message={error} />}
       </div>
     </section>
   );

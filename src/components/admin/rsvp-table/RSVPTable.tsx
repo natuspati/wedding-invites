@@ -1,11 +1,11 @@
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import config from "@/config";
-import {RSVPInDB} from "@/components/rsvp/RSVP.shema";
+import type { RSVPInDB } from "@/components/rsvp/RSVP.shema";
 import ConfirmDelete from "@/components/admin/rsvp-table/ConfirmDelete";
 import styles from "@/components/admin/rsvp-table/RSVPTable.module.css";
-import {getDefaultDates} from "@/utils/date"
-import {PaginatedRSVP, PaginatedRSVPSchema} from "@/components/admin/rsvp-table/RSVPTable.schema";
-
+import { getDefaultDates } from "@/utils/date";
+import type { PaginatedRSVP } from "@/components/admin/rsvp-table/RSVPTable.schema";
+import { PaginatedRSVPSchema } from "@/components/admin/rsvp-table/RSVPTable.schema";
 
 const STATUS_LABELS: Record<string, string> = {
   accepted_solo: "Accepted Solo",
@@ -18,7 +18,6 @@ const STATUS_CLASS: Record<string, string> = {
   accepted_duo: styles.statusDuo,
   rejected: styles.statusNo,
 };
-
 
 export default function RSVPTable() {
   const defaults = getDefaultDates();
@@ -77,7 +76,9 @@ export default function RSVPTable() {
     }
 
     try {
-      const res = await fetch(`${config.apiUrl}/api/v1/rsvp?${params.toString()}`);
+      const res = await fetch(
+        `${config.apiUrl}/api/v1/rsvp?${params.toString()}`
+      );
       if (!res.ok) throw new Error("Server error");
 
       const json = await res.json();
@@ -104,7 +105,6 @@ export default function RSVPTable() {
     setRows([]);
     setTotal(0);
     fetchPage(1, appliedName, appliedStart, appliedEnd, true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appliedName, appliedStart, appliedEnd]);
 
   useEffect(() => {
@@ -114,13 +114,18 @@ export default function RSVPTable() {
         hasMoreRef.current &&
         !loadingRef.current
       ) {
-        fetchPage(pageRef.current, appliedName, appliedStart, appliedEnd, false);
+        fetchPage(
+          pageRef.current,
+          appliedName,
+          appliedStart,
+          appliedEnd,
+          false
+        );
       }
     });
 
     if (sentinelRef.current) observer.observe(sentinelRef.current);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appliedName, appliedStart, appliedEnd]);
 
   function handleSearch(e: React.FormEvent) {
@@ -149,9 +154,12 @@ export default function RSVPTable() {
 
     setIsDeleting(true);
     try {
-      const res = await fetch(`${config.apiUrl}/api/v1/rsvp/${deleteTargetId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${config.apiUrl}/api/v1/rsvp/${deleteTargetId}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!res.ok) throw new Error();
 
       setRows((prev) => prev.filter((r) => r.id !== deleteTargetId));
@@ -219,59 +227,61 @@ export default function RSVPTable() {
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
           <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Partner's name</th>
-            <th>Status</th>
-            <th>Creation date</th>
-            <th></th>
-          </tr>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Partner's name</th>
+              <th>Status</th>
+              <th>Creation date</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
-          {rows.map((row) => (
-            <tr key={row.id}>
-              <td className={styles.idCell}>{row.id}</td>
-              <td>{row.name ?? <span className={styles.empty}>—</span>}</td>
-              <td>
-                {row.partner_name ?? <span className={styles.empty}>—</span>}
-              </td>
-              <td>
-                  <span className={`${styles.statusBadge} ${STATUS_CLASS[row.status] ?? ""}`}>
+            {rows.map((row) => (
+              <tr key={row.id}>
+                <td className={styles.idCell}>{row.id}</td>
+                <td>{row.name ?? <span className={styles.empty}>—</span>}</td>
+                <td>
+                  {row.partner_name ?? <span className={styles.empty}>—</span>}
+                </td>
+                <td>
+                  <span
+                    className={`${styles.statusBadge} ${STATUS_CLASS[row.status] ?? ""}`}
+                  >
                     {STATUS_LABELS[row.status] ?? row.status}
                   </span>
-              </td>
-              <td className={styles.dateCell}>
-                {new Date(row.created_at).toLocaleString("kk-KZ", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </td>
-              <td>
-                <button
-                  className={styles.deleteBtn}
-                  onClick={() => openDeleteModal(row.id)} // Changed this
-                  title="Delete"
-                >
-                  ✕
-                </button>
-              </td>
-            </tr>
-          ))}
-          {rows.length === 0 && !loading && (
-            <tr>
-              <td colSpan={6} className={styles.empty}>
-                No RSVPs found
-              </td>
-            </tr>
-          )}
+                </td>
+                <td className={styles.dateCell}>
+                  {new Date(row.created_at).toLocaleString("kk-KZ", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </td>
+                <td>
+                  <button
+                    className={styles.deleteBtn}
+                    onClick={() => openDeleteModal(row.id)} // Changed this
+                    title="Delete"
+                  >
+                    ✕
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {rows.length === 0 && !loading && (
+              <tr>
+                <td colSpan={6} className={styles.empty}>
+                  No RSVPs found
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
 
-        <div ref={sentinelRef} className={styles.sentinel}/>
+        <div ref={sentinelRef} className={styles.sentinel} />
         {loading && <div className={styles.loadingRow}>Жүктелуде…</div>}
         {error && <div className={styles.errorRow}>{error}</div>}
       </div>

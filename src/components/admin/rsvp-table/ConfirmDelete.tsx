@@ -11,7 +11,7 @@ export default function ConfirmDelete({
   isOpen,
   onConfirm,
   onCancel,
-  isLoading
+  isLoading,
 }: ConfirmDeleteProps) {
   if (!isOpen) return null;
 
@@ -19,7 +19,10 @@ export default function ConfirmDelete({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <h4>Confirm Deletion</h4>
-        <p>Are you sure you want to delete this RSVP? This action cannot be undone.</p>
+        <p>
+          Are you sure you want to delete this RSVP? This action cannot be
+          undone.
+        </p>
         <div className={styles.modalActions}>
           <button
             type="button"

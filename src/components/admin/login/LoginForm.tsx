@@ -36,8 +36,12 @@ export default function LoginForm({ onLogin, error }: LoginFormProps) {
             className={styles.loginInput}
             autoComplete="current-password"
           />
-          {error && <p className={styles.loginError}>Username or password is wrong</p>}
-          <button type="submit" className={styles.loginBtn}>Sign in</button>
+          {error && (
+            <p className={styles.loginError}>Username or password is wrong</p>
+          )}
+          <button type="submit" className={styles.loginBtn}>
+            Sign in
+          </button>
         </form>
       </div>
     </div>
