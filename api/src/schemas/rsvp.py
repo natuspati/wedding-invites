@@ -52,5 +52,7 @@ class RSVPFilterSchema(BaseModel):
 
 
 class PaginatedRSVPSchema(BaseModel):
-    contents: list[RSVPInDBSchema]
+    page: int
+    page_size: int
     total: int
+    contents: list[RSVPInDBSchema]

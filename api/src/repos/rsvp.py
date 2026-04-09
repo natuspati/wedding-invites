@@ -37,8 +37,10 @@ class RSVPRepo:
         total = self._session.scalar(count_stmt)
         
         return PaginatedRSVPSchema(
-            contents=validate_model(res, RSVPInDBSchema),
+            page=filters.page,
+            page_size=filters.page_size,
             total=total,
+            contents=validate_model(res, RSVPInDBSchema),
         )
     
     def select_by_name(self, name: str) -> list[RSVPInDBSchema]:
