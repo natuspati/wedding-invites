@@ -5,6 +5,7 @@ import sqlalchemy
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from enums import AppEnvironmentEnum
+from utils.application_version import get_version
 
 
 class Settings(BaseSettings):
@@ -20,7 +21,7 @@ class Settings(BaseSettings):
     # Application state
     environment: AppEnvironmentEnum = AppEnvironmentEnum.LOCAL
     name: str = "Wedding invite API"
-    version: str = "0.1.0"
+    version: str = get_version()
     secret_key: str = "secret"
 
     # Uvicorn

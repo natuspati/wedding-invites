@@ -38,4 +38,8 @@ async def redirect_to_docs() -> RedirectResponse:
 
 add_error_handlers(app)
 
-_logger.info(f"Finished setting application up, version: {settings.version}")
+_logger.warning(
+    "Finished setting application up, "
+    f"version: {settings.version}, "
+    f"environment: {settings.environment}",
+)
