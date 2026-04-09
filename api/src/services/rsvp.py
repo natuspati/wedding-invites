@@ -14,7 +14,7 @@ class RSVPService:
     def get(self, filters: RSVPFilterSchema) -> PaginatedRSVPSchema:
         with self._uow as uow:
             fetched_rsvps = uow.rsvp.select(filters)
-        return PaginatedRSVPSchema(contents=fetched_rsvps)
+        return fetched_rsvps
 
     def create(self, rsvp: RSVPCreateSchema) -> RSVPInDBSchema:
         with self._uow as uow:
@@ -26,3 +26,7 @@ class RSVPService:
             created_rsvp = uow.rsvp.insert(rsvp)
 
         return created_rsvp
+
+    def delete(self, rsvp_id: int) -> None:
+        with self._uow as uow:
+            uow.rsvp.delete(rsvp_id)
