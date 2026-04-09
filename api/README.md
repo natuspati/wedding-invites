@@ -1,0 +1,1 @@
+# Wedding invites API
