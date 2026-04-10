@@ -34,3 +34,6 @@ yarn-error.log*
 
 # SQLite
 **/*.db
+
+# Certificates
+**/*.pem
