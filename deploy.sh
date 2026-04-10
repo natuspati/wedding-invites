@@ -10,12 +10,14 @@ echo "--- Starting Deployment ---"
 
 # 1. Pull latest code
 cd $PROJECT_ROOT
+# Reset any local changes/case-sensitivity issues
+git checkout -- .
 git pull origin main
 
 # 2. Build Frontend
 echo "Building Frontend..."
-# Temporarily unset homepage/base for IP-based hosting if needed
-# Or ensure vite.config.ts uses base: '/'
+# Ensure we use enough memory for the build and handle Vite build overhead
+export NODE_OPTIONS="--max-old-space-size=1536"
 npm install
 npm run build
 
@@ -29,7 +31,6 @@ sudo chown -R www-data:www-data $NGINX_WWW
 # 4. Update Backend
 echo "Updating Backend..."
 cd $PROJECT_ROOT/api
-# Ensure uv is available
 if ! command -v uv &> /dev/null
 then
     echo "Installing uv..."
@@ -41,6 +42,7 @@ uv sync --frozen --no-dev
 
 # 5. Restart Services
 echo "Restarting Services..."
+sudo systemctl daemon-reload
 sudo systemctl restart wedding-api
 sudo systemctl restart nginx
 
