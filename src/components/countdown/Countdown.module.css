@@ -21,9 +21,13 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-style: italic;
   margin-bottom: 2rem;
-  color: #333;
+  color: #4a3728;
+  letter-spacing: 0.04em;
 }
 
 .timerGrid {
@@ -38,16 +42,20 @@
 
 .timeBox span {
   display: block;
-  font-size: 2rem;
-  font-weight: bold;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2.6rem;
+  font-weight: 300;
   color: #d4a373;
+  line-height: 1;
 }
 
 .timeBox p {
-  font-size: 0.8rem;
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1rem;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: #666;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 @media (min-width: 768px) {
@@ -61,6 +69,6 @@
     gap: 10px;
   }
   .timeBox span {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 }
