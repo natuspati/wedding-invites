@@ -24,11 +24,12 @@ sudo chown -R www-data:www-data $NGINX_WWW
 
 echo "Updating Backend..."
 cd $PROJECT_ROOT/api
+export PATH="$HOME/.local/bin:$PATH"
+
 if ! command -v uv &> /dev/null
 then
     echo "Installing uv..."
     curl -LsSf https://astral.sh/uv/install.sh | sh
-    source $HOME/.cargo/env
 fi
 
 uv sync --frozen --no-dev
