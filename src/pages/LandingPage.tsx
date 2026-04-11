@@ -4,6 +4,7 @@ import Location from "@/components/location/Location";
 import RSVP from "@/components/rsvp/RSVP";
 import Gallery from "@/components/gallery/Gallery";
 import Countdown from "@/components/countdown/Countdown";
+import SharedAlbum from "@/components/shared-album/SharedAlbum";
 
 export default function LandingPage() {
   return (
@@ -12,6 +13,7 @@ export default function LandingPage() {
       <Hero />
       <Location />
       <RSVP />
+      <SharedAlbum />
       <Gallery />
       <Countdown />
     </>
