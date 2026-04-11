@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import config from "@/config";
-import backgroundMusic from "@/assets/background.mp3";
 import styles from "./BackgroundMusic.module.css";
 
 export default function BackgroundMusic() {
@@ -11,14 +10,16 @@ export default function BackgroundMusic() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    audio.volume = config.backgroundMusicVolume;
-    audio.play().catch(() => {
-      const resume = () => {
-        audio.play();
-        document.removeEventListener("click", resume);
-      };
-      document.addEventListener("click", resume);
-      return () => document.removeEventListener("click", resume);
+    import("@/assets/background.mp3").then(({ default: src }) => {
+      audio.src = src;
+      audio.volume = config.backgroundMusicVolume;
+      audio.play().catch(() => {
+        const resume = () => {
+          audio.play();
+          document.removeEventListener("click", resume);
+        };
+        document.addEventListener("click", resume);
+      });
     });
   }, []);
 
@@ -30,9 +31,7 @@ export default function BackgroundMusic() {
 
   return (
     <>
-      <audio ref={audioRef} loop>
-        <source src={backgroundMusic} type="audio/mpeg" />
-      </audio>
+      <audio ref={audioRef} loop preload="none" />
 
       <button
         className={styles.muteButton}

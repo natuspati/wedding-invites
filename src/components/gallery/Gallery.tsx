@@ -3,14 +3,16 @@ import { createPortal } from "react-dom";
 import styles from "@/components/gallery/Gallery.module.css";
 
 const mediaModules = import.meta.glob("/src/assets/gallery/*.{png,mp4}", {
-  eager: true,
+  eager: false,
   import: "default",
 });
 
-const items = Object.entries(mediaModules).map(([path, url]) => ({
-  type: path.endsWith(".mp4") ? "video" : "image",
-  src: url as string,
-}));
+const items = await Promise.all(
+  Object.entries(mediaModules).map(async ([path, load]) => ({
+    type: path.endsWith(".mp4") ? "video" : "image",
+    src: (await (load as () => Promise<string>)()) as string,
+  }))
+);
 
 export default function Gallery() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
