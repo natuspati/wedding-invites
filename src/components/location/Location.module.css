@@ -1,9 +1,11 @@
 .directionsLink {
   display: inline-block;
+  font-family: "EB Garamond", Georgia, serif;
   color: #007aff;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.02em;
 }
 
 .directionsLink:hover {
