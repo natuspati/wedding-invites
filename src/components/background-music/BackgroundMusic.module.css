@@ -1,0 +1,30 @@
+.muteButton {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
+}
+
+.muteButton:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.muteButton:active {
+  transform: scale(0.93);
+}
