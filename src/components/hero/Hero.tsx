@@ -13,15 +13,19 @@ export default function Hero() {
           <p className={styles.nameBottom}>{shuffledNames[1]}</p>
         </div>
 
+        <p className={styles.date}>4 Шілде, 2026</p>
+
         <hr className={styles.divider} />
 
-        <p className={styles.date}>4 Шілде, 2026</p>
         <p className={styles.subtitle}>
           Құрметті қонақтар, біздің тойымызға қош келдіңіздер!
         </p>
-        <p className={styles.quote}>
-          Ғашықтық - адам өмірінің ең тәтті сыры. — Мұхтар Әуезов
-        </p>
+        <figure className={styles.quote}>
+          <blockquote className={styles.quoteText}>
+            Ғашықтық — адам өмірінің ең тәтті сыры.
+          </blockquote>
+          <figcaption className={styles.quoteAuthor}>Мұхтар Әуезов</figcaption>
+        </figure>
       </div>
     </section>
   );

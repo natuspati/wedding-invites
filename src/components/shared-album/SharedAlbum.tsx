@@ -28,10 +28,14 @@ export default function SharedAlbum() {
           Сіздің сәттеріңізді көргіміз келеді ❤️
         </p>
 
-        <div
-          className={styles.qr}
-          dangerouslySetInnerHTML={{ __html: qrSvg }}
-        />
+        <div className={styles.qrWrapper}>
+          <div className={styles.qrRing}>
+            <div
+              className={styles.qr}
+              dangerouslySetInnerHTML={{ __html: qrSvg }}
+            />
+          </div>
+        </div>
 
         <a
           className={styles.link}

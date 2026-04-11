@@ -1,15 +1,46 @@
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 4px 0 20px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 22px;
+  color: #444;
+  line-height: 1.4;
+}
+
+.metaIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.75;
+}
+
 .directionsLink {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: "EB Garamond", Georgia, serif;
-  color: #007aff;
+  color: #2a7a6a;
   text-decoration: none;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(42, 122, 106, 0.35);
+  padding-bottom: 2px;
+  transition: all 0.2s ease;
 }
 
 .directionsLink:hover {
-  text-decoration: underline;
+  color: #1f5c4f;
+  border-bottom-color: #1f5c4f;
+  gap: 10px;
 }
 
 .mapWrapper {
@@ -17,7 +48,8 @@
   height: 300px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 @media (max-height: 700px) {

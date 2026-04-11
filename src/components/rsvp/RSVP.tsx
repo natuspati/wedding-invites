@@ -1,9 +1,35 @@
 import { useState, useEffect } from "react";
+import confetti from "canvas-confetti";
 import styles from "@/components/rsvp/RSVP.module.css";
 import config from "@/config";
 import type { RSVPChoice, RSVPInDB } from "@/components/rsvp/RSVP.shema";
 import { RSVPCreateSchema } from "@/components/rsvp/RSVP.shema";
 import ErrorMessage from "@/components/rsvp/ErrorMessage";
+
+function launchConfetti() {
+  const duration = 3200;
+  const end = Date.now() + duration;
+
+  const colors = ["#3d9b6b", "#09868b", "#d4a34a", "#b8863a", "#8cb86a", "#ffffff"];
+
+  (function frame() {
+    confetti({
+      particleCount: 6,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors,
+    });
+    confetti({
+      particleCount: 6,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors,
+    });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
+}
 
 export default function RSVP() {
   const [choice, setChoice] = useState<RSVPChoice | null>(null);
@@ -61,6 +87,9 @@ export default function RSVP() {
       console.log(`Saved RSVP with id: ${data.id}`);
 
       localStorage.setItem("wedding_rsvp_submitted", "true");
+
+      if (choice !== "no") launchConfetti();
+
       setSubmitted(true);
     } catch (err) {
       console.error(err);
@@ -90,6 +119,7 @@ export default function RSVP() {
               className={`${styles.choiceBtn} ${choice === "solo" ? styles.active : ""}`}
               onClick={() => handleChoice("solo")}
             >
+              <span className={styles.choiceIcon}>✓</span>
               Әрине, келемін
             </button>
 
@@ -98,6 +128,7 @@ export default function RSVP() {
               className={`${styles.choiceBtn} ${choice === "partner" ? styles.active : ""}`}
               onClick={() => handleChoice("partner")}
             >
+              <span className={styles.choiceIcon}>✓</span>
               Жұбайыммен келемін
             </button>
 
@@ -106,6 +137,7 @@ export default function RSVP() {
               className={`${styles.choiceBtn} ${choice === "no" ? styles.active : ""}`}
               onClick={() => handleChoice("no")}
             >
+              <span className={styles.choiceIcon}>−</span>
               Келе алмаймын
             </button>
           </div>
