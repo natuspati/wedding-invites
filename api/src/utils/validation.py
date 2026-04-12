@@ -30,7 +30,7 @@ def _validate_model(
     try:
         return dto.model_validate(data, from_attributes=True)
     except pydantic.ValidationError as error:
-        raise SchemaValidationError(error) from error
+        raise SchemaValidationError(detail=error.json()) from error
 
 
 def _validate_models(
@@ -43,4 +43,4 @@ def _validate_models(
             for obj in data
         ]
     except pydantic.ValidationError as error:
-        raise SchemaValidationError(error) from error
+        raise SchemaValidationError(detail=error.json()) from error

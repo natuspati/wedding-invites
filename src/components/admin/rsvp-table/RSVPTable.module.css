@@ -252,3 +252,104 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.editingRow {
+  background: rgba(176, 141, 106, 0.06);
+}
+
+.editInput {
+  padding: 5px 8px;
+  border: 1px solid rgba(176, 141, 106, 0.6);
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  min-width: 120px;
+  background: rgba(255, 255, 255, 0.95);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.editInput:focus {
+  border-color: #b08d6a;
+}
+
+.actionsCell {
+  white-space: nowrap;
+}
+
+.editActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.editBtn {
+  background: transparent;
+  border: none;
+  color: #bbb;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.editBtn:hover {
+  background: rgba(176, 141, 106, 0.12);
+  color: #b08d6a;
+}
+
+.saveBtn {
+  background: transparent;
+  border: none;
+  color: #2d7a46;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background: rgba(52, 168, 83, 0.1);
+}
+
+.saveBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancelEditBtn {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.cancelEditBtn:hover:not(:disabled) {
+  background: rgba(192, 57, 43, 0.1);
+  color: #c0392b;
+}
+
+.editError {
+  color: #c0392b;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: help;
+  padding: 0 4px;
+}
+
+.fieldError {
+  display: block;
+  font-size: 11px;
+  color: #c0392b;
+  margin-top: 3px;
+}

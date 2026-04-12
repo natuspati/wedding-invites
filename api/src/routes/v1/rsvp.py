@@ -3,7 +3,14 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, status
 from fastapi.params import Query
 
-from schemas.rsvp import PaginatedRSVPSchema, RSVPCreateSchema, RSVPFilterSchema, RSVPInDBSchema
+from schemas.base import BaseErrorSchema
+from schemas.rsvp import (
+    PaginatedRSVPSchema,
+    RSVPCreateSchema,
+    RSVPFilterSchema,
+    RSVPInDBSchema,
+    RSVPUpdateSchema,
+)
 from services import RSVPService
 
 router = APIRouter(prefix="/rsvp", tags=["RSVP"])
@@ -23,6 +30,20 @@ def get_rsvps(
     service: Annotated[RSVPService, Depends()],
 ) -> PaginatedRSVPSchema:
     return service.get(filters)
+
+
+@router.patch(
+    "/{rsvp_id}",
+    responses={
+        status.HTTP_404_NOT_FOUND: {"description": "RSVP not found", "model": BaseErrorSchema},
+    },
+)
+def update_rsvp(
+    rsvp_id: int,
+    rsvp: RSVPUpdateSchema,
+    service: Annotated[RSVPService, Depends()],
+) -> RSVPInDBSchema:
+    return service.update(rsvp_id, rsvp)
 
 
 @router.delete("/{rsvp_id}", status_code=status.HTTP_204_NO_CONTENT)
