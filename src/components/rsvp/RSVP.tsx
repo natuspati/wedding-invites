@@ -10,7 +10,14 @@ function launchConfetti() {
   const duration = 3200;
   const end = Date.now() + duration;
 
-  const colors = ["#3d9b6b", "#09868b", "#d4a34a", "#b8863a", "#8cb86a", "#ffffff"];
+  const colors = [
+    "#3d9b6b",
+    "#09868b",
+    "#d4a34a",
+    "#b8863a",
+    "#8cb86a",
+    "#ffffff",
+  ];
 
   (function frame() {
     confetti({
@@ -102,7 +109,7 @@ export default function RSVP() {
       <section>
         <div className="container section-card">
           <h3>Көп рақмет! ❤️</h3>
-          <p>Сіздің қауабыңыз сақталды.</p>
+          <p>Сіздің жауабыңыз сақталды.</p>
         </div>
       </section>
     );
@@ -163,7 +170,7 @@ export default function RSVP() {
 
           {choice && (
             <button className={styles.submitBtn} type="submit">
-              Қауапты жіберу
+              Жауапты жіберу
             </button>
           )}
         </form>

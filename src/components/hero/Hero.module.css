@@ -35,9 +35,15 @@
 }
 
 @keyframes name-shimmer {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -98,7 +104,12 @@
 .divider {
   width: 60px;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(200, 160, 80, 0.5), transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(200, 160, 80, 0.5),
+    transparent
+  );
   margin: 18px auto;
   border: none;
 }
@@ -149,5 +160,5 @@
 }
 
 .quoteAuthor::before {
-  content: '— ';
+  content: "— ";
 }

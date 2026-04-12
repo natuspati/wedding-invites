@@ -43,7 +43,11 @@
 
 .choiceBtn.active {
   border-color: transparent;
-  background: linear-gradient(135deg, rgba(61, 155, 107, 0.15), rgba(9, 134, 139, 0.12));
+  background: linear-gradient(
+    135deg,
+    rgba(61, 155, 107, 0.15),
+    rgba(9, 134, 139, 0.12)
+  );
   color: #2a6b5a;
   box-shadow: 0 4px 16px rgba(61, 155, 107, 0.2);
   border: 1.5px solid rgba(61, 155, 107, 0.5);
@@ -102,7 +106,9 @@
   width: 100%;
   box-sizing: border-box;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
   color: #333;
 }
 

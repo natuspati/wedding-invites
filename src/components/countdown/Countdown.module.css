@@ -74,8 +74,13 @@
 }
 
 @keyframes pulse-border {
-  0%, 100% { border-color: rgba(255, 255, 255, 0.4); }
-  50%       { border-color: rgba(212, 163, 74, 0.45); }
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    border-color: rgba(212, 163, 74, 0.45);
+  }
 }
 
 .number {

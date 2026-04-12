@@ -6,6 +6,7 @@ import styles from "@/components/admin/rsvp-table/RSVPTable.module.css";
 import { getDefaultDates } from "@/utils/date";
 import type { PaginatedRSVP } from "@/components/admin/rsvp-table/RSVPTable.schema";
 import { PaginatedRSVPSchema } from "@/components/admin/rsvp-table/RSVPTable.schema";
+import { RSVPInDBSchema } from "@/components/rsvp/RSVP.shema";
 
 const STATUS_LABELS: Record<string, string> = {
   accepted_solo: "Accepted Solo",
@@ -18,6 +19,12 @@ const STATUS_CLASS: Record<string, string> = {
   accepted_duo: styles.statusDuo,
   rejected: styles.statusNo,
 };
+
+interface EditState {
+  id: number;
+  name: string;
+  partner_name: string;
+}
 
 export default function RSVPTable() {
   const defaults = getDefaultDates();
@@ -42,6 +49,10 @@ export default function RSVPTable() {
 
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const [editingRow, setEditingRow] = useState<EditState | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [editError, setEditError] = useState<string | null>(null);
 
   const attendanceCount = rows.reduce((acc, r) => {
     if (r.status === "rejected") return acc;
@@ -156,19 +167,66 @@ export default function RSVPTable() {
     try {
       const res = await fetch(
         `${config.apiUrl}/api/v1/rsvp/${deleteTargetId}`,
-        {
-          method: "DELETE",
-        }
+        { method: "DELETE" }
       );
       if (!res.ok) throw new Error();
 
       setRows((prev) => prev.filter((r) => r.id !== deleteTargetId));
       setTotal((t) => t - 1);
-      setDeleteTargetId(null); // Close modal
+      setDeleteTargetId(null);
     } catch {
       alert("Failed to delete RSVP");
     } finally {
       setIsDeleting(false);
+    }
+  }
+
+  function startEditing(row: RSVPInDB) {
+    setEditError(null);
+    setEditingRow({
+      id: row.id,
+      name: row.name ?? "",
+      partner_name: row.partner_name ?? "",
+    });
+  }
+
+  function cancelEditing() {
+    setEditingRow(null);
+    setEditError(null);
+  }
+
+  async function handleSaveEdit() {
+    if (!editingRow) return;
+
+    setIsSaving(true);
+    setEditError(null);
+
+    const body: Record<string, string | null> = {
+      name: editingRow.name.trim() || null,
+      partner_name: editingRow.partner_name.trim() || null,
+    };
+
+    try {
+      const res = await fetch(`${config.apiUrl}/api/v1/rsvp/${editingRow.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        const json = await res.json().catch(() => null);
+        throw new Error(json?.detail ?? "Failed to save");
+      }
+
+      const json = await res.json();
+      const updated = RSVPInDBSchema.parse(json);
+
+      setRows((prev) => prev.map((r) => (r.id === updated.id ? updated : r)));
+      setEditingRow(null);
+    } catch (err) {
+      setEditError(err instanceof Error ? err.message : "Failed to save");
+    } finally {
+      setIsSaving(false);
     }
   }
 
@@ -237,40 +295,126 @@ export default function RSVPTable() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr key={row.id}>
-                <td className={styles.idCell}>{row.id}</td>
-                <td>{row.name ?? <span className={styles.empty}>—</span>}</td>
-                <td>
-                  {row.partner_name ?? <span className={styles.empty}>—</span>}
-                </td>
-                <td>
-                  <span
-                    className={`${styles.statusBadge} ${STATUS_CLASS[row.status] ?? ""}`}
-                  >
-                    {STATUS_LABELS[row.status] ?? row.status}
-                  </span>
-                </td>
-                <td className={styles.dateCell}>
-                  {new Date(row.created_at).toLocaleString("kk-KZ", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </td>
-                <td>
-                  <button
-                    className={styles.deleteBtn}
-                    onClick={() => openDeleteModal(row.id)} // Changed this
-                    title="Delete"
-                  >
-                    ✕
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {rows.map((row) => {
+              const isEditing = editingRow?.id === row.id;
+
+              return (
+                <tr
+                  key={row.id}
+                  className={isEditing ? styles.editingRow : undefined}
+                >
+                  <td className={styles.idCell}>{row.id}</td>
+
+                  <td>
+                    {isEditing ? (
+                      <>
+                        <input
+                          className={styles.editInput}
+                          value={editingRow.name}
+                          onChange={(e) =>
+                            setEditingRow(
+                              (s) => s && { ...s, name: e.target.value }
+                            )
+                          }
+                          placeholder="Name"
+                          autoFocus
+                        />
+                        {!editingRow.name.trim() &&
+                          editingRow.partner_name.trim() && (
+                            <span className={styles.fieldError}>
+                              Required when partner is set
+                            </span>
+                          )}
+                      </>
+                    ) : (
+                      (row.name ?? <span className={styles.empty}>—</span>)
+                    )}
+                  </td>
+
+                  <td>
+                    {isEditing ? (
+                      <input
+                        className={styles.editInput}
+                        value={editingRow.partner_name}
+                        onChange={(e) =>
+                          setEditingRow(
+                            (s) => s && { ...s, partner_name: e.target.value }
+                          )
+                        }
+                        placeholder="Partner's name"
+                      />
+                    ) : (
+                      (row.partner_name ?? (
+                        <span className={styles.empty}>—</span>
+                      ))
+                    )}
+                  </td>
+
+                  <td>
+                    <span
+                      className={`${styles.statusBadge} ${STATUS_CLASS[row.status] ?? ""}`}
+                    >
+                      {STATUS_LABELS[row.status] ?? row.status}
+                    </span>
+                  </td>
+
+                  <td className={styles.dateCell}>
+                    {new Date(row.created_at).toLocaleString("kk-KZ", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </td>
+
+                  <td className={styles.actionsCell}>
+                    {isEditing ? (
+                      <div className={styles.editActions}>
+                        {editError && (
+                          <span className={styles.editError} title={editError}>
+                            !
+                          </span>
+                        )}
+                        <button
+                          className={styles.saveBtn}
+                          onClick={handleSaveEdit}
+                          disabled={isSaving}
+                          title="Save"
+                        >
+                          {isSaving ? "…" : "✓"}
+                        </button>
+                        <button
+                          className={styles.cancelEditBtn}
+                          onClick={cancelEditing}
+                          disabled={isSaving}
+                          title="Cancel"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ) : (
+                      <div className={styles.editActions}>
+                        <button
+                          className={styles.editBtn}
+                          onClick={() => startEditing(row)}
+                          title="Edit"
+                        >
+                          ✎
+                        </button>
+                        <button
+                          className={styles.deleteBtn}
+                          onClick={() => openDeleteModal(row.id)}
+                          title="Delete"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
             {rows.length === 0 && !loading && (
               <tr>
                 <td colSpan={6} className={styles.empty}>

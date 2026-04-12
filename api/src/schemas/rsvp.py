@@ -1,7 +1,14 @@
 from datetime import datetime, timedelta
-from typing import Annotated
+from typing import Annotated, Self
 
-from pydantic import BaseModel, Field, PositiveInt, StringConstraints, computed_field
+from pydantic import (
+    BaseModel,
+    Field,
+    PositiveInt,
+    StringConstraints,
+    computed_field,
+    model_validator,
+)
 
 from enums import RSVPStatusEnum
 
@@ -15,6 +22,18 @@ NameStr = Annotated[
 
 
 class RSVPCreateSchema(BaseModel):
+    name: NameStr = None
+    partner_name: NameStr = None
+
+    @model_validator(mode="after")
+    def check_name_filled(self) -> Self:
+        if self.partner_name is not None and self.name is None:
+            raise ValueError("Name must be provided if partner is present")
+
+        return self
+
+
+class RSVPUpdateSchema(BaseModel):
     name: NameStr = None
     partner_name: NameStr = None
 

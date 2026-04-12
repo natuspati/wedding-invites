@@ -7,7 +7,11 @@
   margin: auto;
   text-align: center;
   background:
-    radial-gradient(ellipse at top center, rgba(212, 175, 55, 0.1), transparent 65%),
+    radial-gradient(
+      ellipse at top center,
+      rgba(212, 175, 55, 0.1),
+      transparent 65%
+    ),
     rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -62,7 +66,12 @@
 .qrRing {
   padding: 4px;
   border-radius: 22px;
-  background: linear-gradient(135deg, rgba(212, 163, 74, 0.5), rgba(180, 220, 180, 0.4), rgba(212, 163, 74, 0.5));
+  background: linear-gradient(
+    135deg,
+    rgba(212, 163, 74, 0.5),
+    rgba(180, 220, 180, 0.4),
+    rgba(212, 163, 74, 0.5)
+  );
 }
 
 .qr {
