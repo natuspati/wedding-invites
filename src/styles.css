@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@400;500;600&display=swap");
 
 body {
   margin: 0;
   font-family: "EB Garamond", Georgia, serif;
   color: #222;
-  font-size: 20px;
+  font-size: 22px;
   background-image: url("./assets/background.jpg");
   background-size: cover;
   background-position: center;
@@ -14,7 +14,7 @@ body {
 }
 
 section {
-  padding: 20px 16px;
+  padding: 28px 20px;
 }
 
 .container {
@@ -24,7 +24,7 @@ section {
 
 p {
   font-family: "EB Garamond", Georgia, serif;
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1.6;
 }
 
@@ -34,15 +34,78 @@ h3,
 h4 {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: #2a7a6a;
 }
 
 .section-card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 30px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 36px 32px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold shimmer accent at the top of every card */
+.section-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(212, 163, 74, 0.6),
+    rgba(180, 220, 180, 0.5),
+    rgba(212, 163, 74, 0.6),
+    transparent
+  );
+  border-radius: 0 0 2px 2px;
+}
+
+/* Ornamental divider used as a separator */
+/* Scroll reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+  color: #d4a373;
+  opacity: 0.6;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+}
+
+.divider-ornament::before,
+.divider-ornament::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d4a373);
+}
+
+.divider-ornament::after {
+  background: linear-gradient(to left, transparent, #d4a373);
 }

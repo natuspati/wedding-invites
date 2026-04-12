@@ -34,7 +34,7 @@ export default function BackgroundMusic() {
       <audio ref={audioRef} loop preload="none" />
 
       <button
-        className={styles.muteButton}
+        className={`${styles.muteButton} ${muted ? styles.muted : ""}`}
         onClick={toggleMute}
         aria-label={muted ? "Unmute music" : "Mute music"}
       >

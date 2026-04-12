@@ -5,7 +5,18 @@ export default function Location() {
     <section>
       <div className="container section-card">
         <h3>Koktal Resort</h3>
-        <p>Еңлік-Кебек көшесі, 1/6, Астана, Қазақстан</p>
+
+        <div className={styles.meta}>
+          <div className={styles.metaItem}>
+            <span className={styles.metaIcon}>📍</span>
+            <span>Еңлік-Кебек көшесі, 1/6, Астана, Қазақстан</span>
+          </div>
+          <div className={styles.metaItem}>
+            <span className={styles.metaIcon}>🕔</span>
+            <span>4 Шілде, 2026 · 15:00</span>
+          </div>
+        </div>
+
         <a
           href="https://go.2gis.com/sNmq0"
           target="_blank"

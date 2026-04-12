@@ -49,23 +49,27 @@ export default function Countdown() {
       </div>
 
       <div className={styles.content}>
-        <h3 className={styles.title}>Тойға дейін:</h3>
+        <span className={styles.ornament}>✦ ✦ ✦</span>
+        <h3 className={styles.title}>Тойға дейін</h3>
         <div className={styles.timerGrid}>
           <div className={styles.timeBox}>
-            <span>{timeLeft.days}</span>
-            <p>күн</p>
+            <span className={styles.number}>{String(timeLeft.days).padStart(2, "0")}</span>
+            <p className={styles.label}>күн</p>
           </div>
+          <span className={styles.separator}>·</span>
           <div className={styles.timeBox}>
-            <span>{timeLeft.hours}</span>
-            <p>сағат</p>
+            <span className={styles.number}>{String(timeLeft.hours).padStart(2, "0")}</span>
+            <p className={styles.label}>сағат</p>
           </div>
+          <span className={styles.separator}>·</span>
           <div className={styles.timeBox}>
-            <span>{timeLeft.minutes}</span>
-            <p>минут</p>
+            <span className={styles.number}>{String(timeLeft.minutes).padStart(2, "0")}</span>
+            <p className={styles.label}>минут</p>
           </div>
-          <div className={styles.timeBox}>
-            <span>{timeLeft.seconds}</span>
-            <p>секунд</p>
+          <span className={styles.separator}>·</span>
+          <div className={`${styles.timeBox} ${styles.seconds}`}>
+            <span className={styles.number}>{String(timeLeft.seconds).padStart(2, "0")}</span>
+            <p className={styles.label}>секунд</p>
           </div>
         </div>
       </div>
