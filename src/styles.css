@@ -5,7 +5,7 @@ body {
   font-family: "EB Garamond", Georgia, serif;
   color: #222;
   font-size: 22px;
-  background-image: url("./assets/background.jpg");
+  background-image: url("./assets/background.webp");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
