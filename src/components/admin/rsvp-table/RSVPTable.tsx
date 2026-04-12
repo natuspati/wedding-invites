@@ -230,6 +230,22 @@ export default function RSVPTable() {
     }
   }
 
+  const isUnchanged =
+    editingRow !== null &&
+    (() => {
+      const row = rows.find((r) => r.id === editingRow.id);
+      return (
+        row &&
+        (editingRow.name.trim() || null) === row.name &&
+        (editingRow.partner_name.trim() || null) === row.partner_name
+      );
+    })();
+
+  const hasPartnerWithoutName =
+    editingRow !== null &&
+    !editingRow.name.trim() &&
+    !!editingRow.partner_name.trim();
+
   return (
     <div className={styles.wrapper}>
       <h3>RSVP Table</h3>
@@ -379,8 +395,16 @@ export default function RSVPTable() {
                         <button
                           className={styles.saveBtn}
                           onClick={handleSaveEdit}
-                          disabled={isSaving}
-                          title="Save"
+                          disabled={
+                            isSaving || !!isUnchanged || hasPartnerWithoutName
+                          }
+                          title={
+                            isUnchanged
+                              ? "No changes"
+                              : hasPartnerWithoutName
+                                ? "Name required"
+                                : "Save"
+                          }
                         >
                           {isSaving ? "…" : "✓"}
                         </button>
