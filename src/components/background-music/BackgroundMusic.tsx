@@ -10,7 +10,7 @@ export default function BackgroundMusic() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    import("@/assets/background.mp3").then(({ default: src }) => {
+    import("@/assets/background_compressed.mp3").then(({ default: src }) => {
       audio.src = src;
       audio.volume = config.backgroundMusicVolume;
       audio.play().catch(() => {
