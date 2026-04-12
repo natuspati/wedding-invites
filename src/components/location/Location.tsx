@@ -13,7 +13,7 @@ export default function Location() {
           </div>
           <div className={styles.metaItem}>
             <span className={styles.metaIcon}>🕔</span>
-            <span>4 Шілде, 2026 · 16:00</span>
+            <span>4 Шілде, 2026 · 15:00</span>
           </div>
         </div>
 
