@@ -1,3 +1,16 @@
+.intro {
+  margin: 8px 0;
+  color: #444;
+  line-height: 1.55;
+}
+
+.introHint {
+  margin: 12px 0 4px;
+  color: #666;
+  font-style: italic;
+  font-size: 20px;
+}
+
 .carousel {
   position: relative;
   margin-top: 20px;
@@ -11,6 +24,7 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   border-radius: 12px;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .track::-webkit-scrollbar {
@@ -24,18 +38,17 @@
   aspect-ratio: 4 / 5;
   border-radius: 12px;
   overflow: hidden;
-  cursor: pointer;
-  background: #f0f0f0;
-  position: relative;
+  background: #f6f3ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.slide img,
-.slide video {
+.slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
-  pointer-events: none;
 }
 
 .navBtn {
@@ -112,74 +125,4 @@
 .dotActive {
   background: #c8a050;
   transform: scale(1.3);
-}
-
-.expanded {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: zoom-out;
-  padding: 20px;
-  box-sizing: border-box;
-  backdrop-filter: blur(5px);
-}
-
-.contentWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
-.expandedMedia {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  pointer-events: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-}
-
-.closeBtn {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 2010;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-  flex-shrink: 0;
-}
-
-.closeBtn:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-@media (max-width: 768px) {
-  .closeBtn {
-    top: 12px;
-    right: 12px;
-    width: 40px;
-    height: 40px;
-  }
 }
