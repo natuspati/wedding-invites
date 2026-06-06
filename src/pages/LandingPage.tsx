@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import BackgroundMusic from "@/components/background-music/BackgroundMusic";
 import Hero from "@/components/hero/Hero";
 import Location from "@/components/location/Location";
+import DressCode from "@/components/dress-code/DressCode";
 import RSVP from "@/components/rsvp/RSVP";
 import Gallery from "@/components/gallery/Gallery";
 import Countdown from "@/components/countdown/Countdown";
@@ -34,6 +35,7 @@ export default function LandingPage() {
       <BackgroundMusic />
       <Hero />
       <Location />
+      <DressCode />
       <RSVP />
       <SharedAlbum />
       <Gallery />
