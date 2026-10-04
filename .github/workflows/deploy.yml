@@ -17,4 +17,5 @@ jobs:
           command_timeout: 10m
           script: |
             cd /home/ubuntu/wedding-invites
+            git pull --ff-only origin azat
             bash deploy.sh

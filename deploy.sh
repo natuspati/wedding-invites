@@ -13,7 +13,7 @@ git pull origin azat
 
 echo "Building Frontend..."
 export NODE_OPTIONS="--max-old-space-size=1536"
-npm install
+npm ci
 npm run build
 
 echo "Updating Frontend files..."
