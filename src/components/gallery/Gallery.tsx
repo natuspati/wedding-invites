@@ -15,7 +15,7 @@ const videoModules = import.meta.glob("/src/assets/gallery/*.mp4", {
   import: "default",
 });
 
-const imagePaths = Object.keys(imageModules);
+const imagePaths = Object.keys(imageModules).sort();
 
 const items = await Promise.all([
   ...imagePaths.map(async (path) => ({

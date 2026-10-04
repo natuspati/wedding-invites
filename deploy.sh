@@ -9,7 +9,7 @@ echo "--- Starting Deployment ---"
 
 cd $PROJECT_ROOT
 git checkout -- .
-git pull origin main
+git pull origin azat
 
 echo "Building Frontend..."
 export NODE_OPTIONS="--max-old-space-size=1536"
@@ -40,4 +40,4 @@ sudo systemctl restart wedding-api
 sudo systemctl restart nginx
 
 echo "--- Deployment Complete! ---"
-echo "Visit http://63.181.129.255"
+echo "Visit http://51.102.171.41"

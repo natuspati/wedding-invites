@@ -26,7 +26,7 @@ plans/        # Feature plans
 
 ## Branching
 
-- Work on **`dev`** branch - merging `dev` → `main` triggers CI/CD
+- Work on **`azat`** branch - pushing to `azat` triggers CI/CD
 - Never push directly to `main`
 
 ---

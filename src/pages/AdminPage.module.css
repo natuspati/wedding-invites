@@ -43,7 +43,7 @@
 }
 
 .loginInput:focus {
-  border-color: #b08d6a;
+  border-color: #7c3aed;
 }
 
 .loginError {
@@ -56,7 +56,7 @@
 .loginBtn {
   margin-top: 6px;
   padding: 12px;
-  background: #b08d6a;
+  background: #7c3aed;
   color: white;
   border: none;
   border-radius: 10px;
@@ -67,7 +67,7 @@
 }
 
 .loginBtn:hover {
-  background: #9a7a59;
+  background: #5b21b6;
 }
 
 .adminWrapper {

@@ -2,7 +2,7 @@ name: Deploy to Lightsail
 
 on:
   push:
-    branches: [main]
+    branches: [azat]
 
 jobs:
   deploy:

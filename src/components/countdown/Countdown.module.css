@@ -22,7 +22,7 @@
 
 .ornament {
   font-size: 18px;
-  color: #d4a373;
+  color: #f4c95d;
   letter-spacing: 0.35em;
   opacity: 0.65;
   display: block;
@@ -35,7 +35,7 @@
   font-weight: 400;
   font-style: italic;
   margin: 0 0 2rem;
-  color: #4a3728;
+  color: #7c3aed;
   letter-spacing: 0.06em;
 }
 
@@ -79,7 +79,7 @@
     border-color: rgba(255, 255, 255, 0.4);
   }
   50% {
-    border-color: rgba(212, 163, 74, 0.45);
+    border-color: rgba(244, 201, 93, 0.45);
   }
 }
 
@@ -89,11 +89,11 @@
   font-size: 3.6rem;
   font-weight: 300;
   line-height: 1;
-  background: linear-gradient(135deg, #b8863a 0%, #d4a34a 45%, #3d7c47 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #f4c95d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 1px 4px rgba(200, 160, 74, 0.3));
+  filter: drop-shadow(0 1px 4px rgba(244, 201, 93, 0.3));
   min-width: 2ch;
   text-align: center;
 }
@@ -112,7 +112,7 @@
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 2.4rem;
   font-weight: 300;
-  color: #d4a373;
+  color: #f4c95d;
   opacity: 0.5;
   line-height: 1;
   margin-bottom: 22px;

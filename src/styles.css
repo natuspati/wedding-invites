@@ -36,7 +36,7 @@ h4 {
   font-weight: 500;
   font-style: italic;
   letter-spacing: 0.04em;
-  color: #2a7a6a;
+  color: #7c3aed;
 }
 
 .section-card {
@@ -64,9 +64,9 @@ h4 {
   background: linear-gradient(
     to right,
     transparent,
-    rgba(212, 163, 74, 0.6),
-    rgba(180, 220, 180, 0.5),
-    rgba(212, 163, 74, 0.6),
+    rgba(244, 201, 93, 0.6),
+    rgba(124, 58, 237, 0.2),
+    rgba(244, 201, 93, 0.6),
     transparent
   );
   border-radius: 0 0 2px 2px;
@@ -92,7 +92,7 @@ h4 {
   align-items: center;
   gap: 10px;
   margin: 16px 0;
-  color: #d4a373;
+  color: #f4c95d;
   opacity: 0.6;
   font-size: 11px;
   letter-spacing: 0.3em;
@@ -103,9 +103,9 @@ h4 {
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, transparent, #d4a373);
+  background: linear-gradient(to right, transparent, #f4c95d);
 }
 
 .divider-ornament::after {
-  background: linear-gradient(to left, transparent, #d4a373);
+  background: linear-gradient(to left, transparent, #f4c95d);
 }

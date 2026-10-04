@@ -10,14 +10,7 @@ function launchConfetti() {
   const duration = 3200;
   const end = Date.now() + duration;
 
-  const colors = [
-    "#3d9b6b",
-    "#09868b",
-    "#d4a34a",
-    "#b8863a",
-    "#8cb86a",
-    "#ffffff",
-  ];
+  const colors = ["#7C3AED", "#F4C95D", "#ffffff"];
 
   (function frame() {
     confetti({
