@@ -17,6 +17,7 @@ export default function Hero() {
         <p className={styles.subtitle}>
           Құрметті қонақтар, біздің тойымызға қош келдіңіздер!
         </p>
+        <p className={styles.host}>Той иесі: Жұлдыз</p>
         <figure className={styles.quote}>
           <blockquote className={styles.quoteText}>
             Махаббат диалогы - екі жүректің әңгімесі.
